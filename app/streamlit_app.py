@@ -139,6 +139,12 @@ def main():
             <b>Non-Destructive Triage</b><br>
             Analyzes file copies without altering timestamps or inode records.
         </div>
+        <div style="font-size: 0.75rem; color: #7d8580; line-height: 1.4; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid #e6e3dc;">
+            <b>Academic Authors:</b><br>
+            Mohika Rathi (230968032)<br>
+            Sreyaan Roy (230968184)<br>
+            <span style="font-size: 0.7rem; color: #9aa19c;">MIT, MAHE Manipal</span>
+        </div>
         """,
         unsafe_allow_html=True,
     )

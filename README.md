@@ -13,8 +13,11 @@
 
 ---
 
-### Project Information & Author
-- **Author:** Mohika Rathi
+### Project Information & Authors
+- **Authors:**
+  - Mohika Rathi (Registration No: 230968032)
+  - Sreyaan Roy (Registration No: 230968184)
+- **Institution:** Manipal Institute of Technology, Manipal Academy of Higher Education (MAHE), Manipal, Karnataka, India
 - **Project:** ForensiGuard
 - **Live Demo Dashboard:** [https://forensi1guard.streamlit.app](https://forensi1guard.streamlit.app)
 - **GitHub Repository:** [https://github.com/mohikarathi/ForensiGuard](https://github.com/mohikarathi/ForensiGuard)

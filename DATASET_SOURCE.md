@@ -3,7 +3,7 @@
 **Dataset Identifier:** `ForensiGuard-Bench-v1`  
 **Dataset Type:** Controlled Synthetic Digital Forensic Benchmark  
 **Generation Date:** October 2026 (Audited and Verified)  
-**Primary Author & Curator:** Mohika Rathi  
+**Authors & Curators:** Mohika Rathi (Reg. No: 230968032) & Sreyaan Roy (Reg. No: 230968184), Manipal Institute of Technology  
 **Repository Version:** v1.0.0  
 **Manifest Path:** `data/benchmark/benchmark_manifest.csv`  
 
@@ -115,7 +115,7 @@ To cite `ForensiGuard-Bench-v1` in academic publications or project reports:
 
 ```bibtex
 @misc{rathi2026forensiguard_bench,
-  author       = {Mohika Rathi},
+  author       = {Mohika Rathi and Sreyaan Roy},
   title        = {{ForensiGuard-Bench-v1: Standardized Multimodal Digital Evidence Anti-Forensic Benchmark}},
   year         = {2026},
   month        = {October},
