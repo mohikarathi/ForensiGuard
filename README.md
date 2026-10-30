@@ -13,11 +13,12 @@
 
 ---
 
-### Project Information & Authors
-- **Authors:**
+### Academic Information & Authors
+- **Student Authors:**
   - Mohika Rathi (Registration No: 230968032)
   - Sreyaan Roy (Registration No: 230968184)
-- **Institution:** Manipal Institute of Technology, Manipal Academy of Higher Education (MAHE), Manipal, Karnataka, India
+- **Branch:** Data Science
+- **Subject:** Data Forensics
 - **Project:** ForensiGuard
 - **Live Demo Dashboard:** [https://forensi1guard.streamlit.app](https://forensi1guard.streamlit.app)
 - **GitHub Repository:** [https://github.com/mohikarathi/ForensiGuard](https://github.com/mohikarathi/ForensiGuard)
@@ -60,20 +61,63 @@ It is vital to distinguish between standard engineering integration and the genu
 
 ---
 
-## 3. Dataset Provenance: ForensiGuard-Bench-v1
+## 3. Dataset Source, Provenance & Citation
 
-The evaluation benchmark (`ForensiGuard-Bench-v1`) is a controlled, fully documented forensic corpus comprising **812 digital artifacts** generated across **140 independent source file groups**.
+The experimental benchmark used throughout this project is **`ForensiGuard-Bench-v1`**, a standardized, leak-free digital forensics corpus engineered specifically to evaluate multi-modal anti-forensic triage without container-format shortcuts or identity leakage.
 
-- **Synthetic Nature & Controlled Generation:** In compliance with forensic reproducibility standards, the dataset was generated using deterministic, seed-controlled (`seed = 42`) manipulation procedures simulating five real-world manipulation classes:
-  1. `clean`: Untampered baseline files.
-  2. `timestomping`: Backward/forward modification shifts and subsecond zeroing.
-  3. `steganography`: Spatial LSB embedding across multiple payload densities.
-  4. `extension_mismatch`: Header signature / extension obfuscation.
-  5. `compound`: Combined timestomping and steganographic manipulation.
-- **Partitions:** 70% Train (98 sources, 568 artifacts), 15% Validation (21 sources, 118 artifacts), 15% Test (21 sources, 126 artifacts).
-- **Zero Source Leakage:** All partitions are grouped strictly by `source_file_id`, ensuring no artifact from a test source ever appears during training.
-- **Format Standardization:** All image carriers are standardized to uncompressed single-channel PNG format to eliminate encoding shortcuts.
-- **Documentation & Manifest:** Full schema details, column definitions, generation algorithms, and formal citations are documented in [`DATASET_SOURCE.md`](DATASET_SOURCE.md).
+### Dataset Access & Manifest Links
+- **Dataset Manifest:** [`data/benchmark/benchmark_manifest.csv`](data/benchmark/benchmark_manifest.csv) *(Complete ground-truth catalog of all 812 artifacts)*
+- **Artifacts Directory:** [`data/benchmark/artifacts/`](data/benchmark/artifacts/) *(Curated forensic test cases organized by folder and source)*
+- **Authoritative Provenance Document:** [`DATASET_SOURCE.md`](DATASET_SOURCE.md) *(Detailed generation algorithms, parameters, and schema specification)*
+
+### Dataset Origin & Construction
+The benchmark was synthesized from **140 authentic, unmanipulated source carrier files** across multiple data modalities:
+- **Image Carriers:** Format-standardized grayscale PNG images ($128 \times 128$) to eliminate container-label shortcuts (e.g. clean JPEG vs stego PNG).
+- **Text & Document Carriers:** Plain-text documents (`.txt`), structured logs (`.log`), shell scripts (`.sh`), Python source code (`.py`), and system configuration files (`.ini`, `.yaml`).
+
+From each pristine carrier, deterministic anti-forensic mutations were generated using POSIX Linux system interfaces (`os.utime`, `stat`), PIL, and open-source steganographic encoders across 5 manipulation classes:
+1. `clean`: Pristine baseline carriers with intact filesystem timestamps and valid container magic bytes.
+2. `timestomping`: Backward and forward modification shifts (coarse multi-year and subtle sub-day shifts) with zeroed microsecond precision.
+3. `steganography`: Spatial LSB embedding across payload rates $\alpha \in [0.08, 0.35]$ bits per pixel without container leakage.
+4. `extension_mismatch`: File-type obfuscation where declared extensions contradict binary magic-byte signatures.
+5. `compound`: Synchronized dual-vector tampering (e.g., spatial stego payload combined with timestamp rollback).
+
+### Partition Breakdown & Zero Source Leakage
+All artifacts are strictly partitioned by `source_file_id` (70% Train, 15% Validation, 15% Test) to guarantee that no evidence artifact derived from a test carrier ever appears during model training:
+
+| Partition | Source Groups | Artifact Count | Clean Artifacts | Manipulated Artifacts | Primary Role |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **Train** | 98 sources (70%) | 568 artifacts | 98 (17.3%) | 470 (82.7%) | Base model & OOF stacked fusion training |
+| **Validation** | 21 sources (15%) | 118 artifacts | 21 (17.8%) | 97 (82.2%) | Threshold calibration ($\tau = 0.500$) |
+| **Held-Out Test** | 21 sources (15%) | 126 artifacts | 21 (16.7%) | 105 (83.3%) | Final blind performance evaluation |
+| **Total** | **140 sources** | **812 artifacts** | **140 (17.2%)** | **672 (82.8%)** | Full benchmark corpus |
+
+### Dataset Schema
+The ground-truth manifest ([`data/benchmark/benchmark_manifest.csv`](data/benchmark/benchmark_manifest.csv)) defines the following schema:
+- `artifact_id`: Unique deterministic identifier (e.g., `art_src_0001_aa1163a6cf`).
+- `source_file_id`: Identifier of the source file family to ensure grouped isolation.
+- `filename` / `file_path`: Relative disk location of the physical artifact.
+- `label`: Binary classification target (`0 = clean`, `1 = manipulated`).
+- `manipulation_technique`: Categorical attribution (`clean`, `timestomping`, `steganography`, `extension_mismatch`, `compound`).
+- `subtype`: Granular attack parameters (e.g., `coarse_multiyear`, `subtle_2h`, `high_payload_0.35`).
+- `split`: Pre-assigned partition assignment (`train`, `val`, `test`).
+- `file_size_bytes` & `declared_extension`: Physical container metadata.
+
+### Formal Dataset Citation
+To cite `ForensiGuard-Bench-v1` in research publications and academic reports:
+
+```bibtex
+@misc{rathi2026forensiguard_bench,
+  author       = {Mohika Rathi and Sreyaan Roy},
+  title        = {{ForensiGuard-Bench-v1: Standardized Multimodal Digital Evidence Anti-Forensic Benchmark}},
+  year         = {2026},
+  month        = {October},
+  howpublished = {Project Repository and Academic Benchmark Suite, Branch: Data Science, Subject: Data Forensics},
+  note         = {Controlled synthetic benchmark of 812 forensic artifacts across 140 source groups with zero source leakage and format-shortcut remediation}
+}
+```
+
+*M. Rathi and S. Roy, "ForensiGuard-Bench-v1: Standardized Multimodal Digital Evidence Anti-Forensic Benchmark," Data Forensics Benchmark Suite, Branch: Data Science, Dec. 2026.*
 
 ---
 

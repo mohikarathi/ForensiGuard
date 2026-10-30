@@ -143,7 +143,7 @@ def main():
             <b>Academic Authors:</b><br>
             Mohika Rathi (230968032)<br>
             Sreyaan Roy (230968184)<br>
-            <span style="font-size: 0.7rem; color: #9aa19c;">MIT, MAHE Manipal</span>
+            <span style="font-size: 0.72rem; color: #404743; font-weight: 600;">Branch: Data Science<br>Subject: Data Forensics</span>
         </div>
         """,
         unsafe_allow_html=True,
