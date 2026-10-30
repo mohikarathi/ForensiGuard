@@ -350,7 +350,7 @@ export const AnalyzeView: React.FC<AnalyzeViewProps> = ({
           <div
             className={`rounded-xl border p-6 shadow-xs space-y-4 transition-all ${
               currentAnalysis.final_prediction?.is_manipulated
-                ? 'border-amber-300 bg-gradient-to-br from-amber-50/60 to-surface'
+                ? 'border-red-300 bg-gradient-to-br from-red-50/70 to-surface'
                 : 'border-olive-200 bg-gradient-to-br from-olive-50/50 to-surface'
             }`}
           >
@@ -359,7 +359,7 @@ export const AnalyzeView: React.FC<AnalyzeViewProps> = ({
                 <div
                   className={`p-2.5 rounded-lg ${
                     currentAnalysis.final_prediction?.is_manipulated
-                      ? 'bg-amber-600 text-white'
+                      ? 'bg-red-600 text-white'
                       : 'bg-olive-700 text-white'
                   }`}
                 >
@@ -373,7 +373,13 @@ export const AnalyzeView: React.FC<AnalyzeViewProps> = ({
                   <div className="text-xs uppercase tracking-wider font-semibold text-charcoal-500">
                     Verdict
                   </div>
-                  <h2 className="text-xl font-bold text-charcoal-900 mt-0.5">
+                  <h2
+                    className={`text-xl font-bold mt-0.5 ${
+                      currentAnalysis.final_prediction?.is_manipulated
+                        ? 'text-red-700'
+                        : 'text-charcoal-900'
+                    }`}
+                  >
                     {currentAnalysis.final_prediction?.is_manipulated
                       ? 'Tampering Detected'
                       : 'Clean / Unmodified'}
@@ -388,7 +394,13 @@ export const AnalyzeView: React.FC<AnalyzeViewProps> = ({
               <div className="flex items-center space-x-6 md:border-l md:border-border md:pl-6 shrink-0">
                 <div className="text-right">
                   <div className="text-xs text-charcoal-500 font-medium">Tamper Probability</div>
-                  <div className="text-2xl font-bold font-mono text-charcoal-900">
+                  <div
+                    className={`text-2xl font-bold font-mono ${
+                      currentAnalysis.final_prediction?.is_manipulated
+                        ? 'text-red-700'
+                        : 'text-charcoal-900'
+                    }`}
+                  >
                     {((currentAnalysis.final_prediction?.manipulation_probability ?? 0) * 100).toFixed(1)}%
                   </div>
                 </div>

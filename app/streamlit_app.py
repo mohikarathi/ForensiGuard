@@ -296,26 +296,49 @@ def main():
 
             st.write("")
 
-            # --- 1. VERDICT BANNER (Matches React Design) ---
-            with st.container(border=True):
-                top_v_col1, top_v_col2, top_v_col3 = st.columns([3, 1, 1])
-                with top_v_col1:
-                    st.caption("VERDICT")
-                    if is_tampered:
-                        st.markdown(f"### Tampering Detected")
-                        st.caption(f"Model score ({p_val:.3f}) exceeds the operational threshold (0.500), indicating probable manipulation.")
-                    else:
-                        st.markdown(f"### Clean / Unaltered")
-                        st.caption(f"Model score ({p_val:.3f}) is within nominal operating envelope (0.500). No anomalous patterns detected.")
-                with top_v_col2:
-                    st.caption("Tamper Probability")
-                    st.markdown(f"<span style='font-size: 1.8rem; font-weight: 800; font-family: monospace;'>{p_val*100:.1f}%</span>", unsafe_allow_html=True)
-                with top_v_col3:
-                    st.caption("Detected Technique")
-                    st.markdown(f"<span style='font-size: 1.1rem; font-weight: 700;'>{attr_tech}</span>", unsafe_allow_html=True)
-                    st.caption(f"Confidence: {conf_val*100:.1f}%")
+            # --- 1. VERDICT BANNER (Matches React Design with Red Alert on Tamper) ---
+            if is_tampered:
+                card_border = "#fca5a5"
+                card_bg = "#fef2f2"
+                title_color = "#dc2626"
+                badge_bg = "#fee2e2"
+                badge_color = "#b91c1c"
+                verdict_text = "Tampering Detected"
+                verdict_sub = f"Model score ({p_val:.3f}) exceeds the operational threshold (0.500), indicating probable manipulation."
+            else:
+                card_border = "#86efac"
+                card_bg = "#f0fdf4"
+                title_color = "#16a34a"
+                badge_bg = "#dcfce7"
+                badge_color = "#15803d"
+                verdict_text = "Clean / Unaltered"
+                verdict_sub = f"Model score ({p_val:.3f}) is within nominal operating envelope (0.500). No anomalous patterns detected."
 
-                st.write("")
+            st.markdown(
+                f"""
+                <div style="background-color: {card_bg}; border: 1.5px solid {card_border}; border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem;">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+                        <div style="flex: 3; min-width: 260px;">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: {badge_color}; background-color: {badge_bg}; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.06em;">VERDICT</span>
+                            <div style="font-size: 1.85rem; font-weight: 800; color: {title_color}; margin-top: 4px; margin-bottom: 4px; line-height: 1.2;">{verdict_text}</div>
+                            <div style="font-size: 0.95rem; color: #404743; line-height: 1.4;">{verdict_sub}</div>
+                        </div>
+                        <div style="flex: 1; min-width: 140px;">
+                            <div style="font-size: 0.75rem; font-weight: 600; color: #5c635f; text-transform: uppercase;">Tamper Probability</div>
+                            <div style="font-size: 2.3rem; font-weight: 900; font-family: monospace; color: {title_color}; line-height: 1.1; margin-top: 4px;">{p_val*100:.1f}%</div>
+                        </div>
+                        <div style="flex: 1; min-width: 140px;">
+                            <div style="font-size: 0.75rem; font-weight: 600; color: #5c635f; text-transform: uppercase;">Detected Technique</div>
+                            <div style="font-size: 1.25rem; font-weight: 800; color: #1a201c; margin-top: 4px;">{attr_tech}</div>
+                            <div style="font-size: 0.8rem; color: #5c635f; margin-top: 2px;">Confidence: {conf_val*100:.1f}%</div>
+                        </div>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+            with st.container(border=True):
                 st.caption("Technique Likelihood")
                 probs = inf.get("attribution_probabilities", {})
                 t_cols = st.columns(5)
@@ -370,7 +393,10 @@ def main():
             with sig_cols[4]:
                 with st.container(border=True):
                     st.caption("Combined Result")
-                    st.markdown(f"### {p_val*100:.1f}%")
+                    if is_tampered:
+                        st.markdown(f"### <span style='color: #dc2626;'>{p_val*100:.1f}%</span>", unsafe_allow_html=True)
+                    else:
+                        st.markdown(f"### <span style='color: #16a34a;'>{p_val*100:.1f}%</span>", unsafe_allow_html=True)
                     st.caption("Decision boundary exceeded: Flagged for review" if is_tampered else "Within nominal benign operating envelope")
 
             st.write("")
