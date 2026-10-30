@@ -259,7 +259,7 @@ def main():
             <b style="color: #1f2937;">Academic Authors:</b><br>
             Mohika Rathi (230968032)<br>
             Sreyaan Roy (230968184)<br>
-            <span style="font-weight: 600; color: #374151;">Branch: Data Science<br>Subject: Data Forensics</span>
+            <span style="font-weight: 600; color: #374151;">Manipal Academy of Higher Education<br>Branch: Data Science<br>Subject: Data Forensics</span>
         </div>
         """,
         unsafe_allow_html=True,

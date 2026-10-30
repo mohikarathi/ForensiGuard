@@ -4,6 +4,7 @@
 **Dataset Type:** Controlled Synthetic Digital Forensic Benchmark  
 **Generation Date:** October 2026 (Audited and Verified)  
 **Authors & Curators:** Mohika Rathi (Reg. No: 230968032) & Sreyaan Roy (Reg. No: 230968184)  
+**Institution:** Manipal Academy of Higher Education  
 **Branch:** Data Science  
 **Subject:** Data Forensics  
 **Repository Version:** v1.0.0  

@@ -16,6 +16,7 @@
 - **Student Authors:**
   - Mohika Rathi (Registration No: 230968032)
   - Sreyaan Roy (Registration No: 230968184)
+- **Institution:** Manipal Academy of Higher Education
 - **Branch:** Data Science
 - **Subject:** Data Forensics
 - **Project:** ForensiGuard
