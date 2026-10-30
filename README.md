@@ -1,5 +1,6 @@
 # ForensiGuard: A Multimodal Machine-Learning Framework for Detecting, Attributing and Explaining Anti-Forensic Manipulation of Digital Evidence
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://forensi1guard.streamlit.app)
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Tests Status](https://img.shields.io/badge/tests-26%20passed-brightgreen.svg)]()
@@ -7,11 +8,16 @@
 [![Academic Evaluation](https://img.shields.io/badge/Late%20Fusion%20F1-0.854-success.svg)]()
 [![ROC-AUC](https://img.shields.io/badge/ROC--AUC-0.895-success.svg)]()
 
+> **Live Interactive Cloud Demo:** [https://forensi1guard.streamlit.app](https://forensi1guard.streamlit.app)  
+> **GitHub Repository:** [https://github.com/mohikarathi/ForensiGuard](https://github.com/mohikarathi/ForensiGuard)
+
 ---
 
 ### Project Information & Author
 - **Author:** Mohika Rathi
 - **Project:** ForensiGuard
+- **Live Demo Dashboard:** [https://forensi1guard.streamlit.app](https://forensi1guard.streamlit.app)
+- **GitHub Repository:** [https://github.com/mohikarathi/ForensiGuard](https://github.com/mohikarathi/ForensiGuard)
 - **License:** MIT License
 
 ---
@@ -129,7 +135,9 @@ All metrics, prediction CSVs, and figures are saved to:
 
 ForensiGuard offers two interactive forensic triage interfaces:
 
-### Option A: Streamlit Dashboard (Local & Streamlit Cloud)
+### Option A: Streamlit Dashboard (Live Cloud Deployment & Local)
+
+- **Live Cloud Demo:** **[https://forensi1guard.streamlit.app](https://forensi1guard.streamlit.app)** *(Instant browser access, zero local installation required)*
 
 Run locally:
 ```bash
@@ -137,14 +145,10 @@ streamlit run streamlit_app.py
 ```
 Open **`http://localhost:8501`** in your browser.
 
-#### 🚀 Deploy to Streamlit Community Cloud in 1 Click:
-1. Sign in to [Streamlit Community Cloud](https://share.streamlit.io/) with your GitHub account.
-2. Click **New app**.
-3. Choose:
-   - **Repository:** `mohikarathi/ForensiGuard`
-   - **Branch:** `main`
-   - **Main file path:** `streamlit_app.py`
-4. Click **Deploy!**
+#### Deploy to Streamlit Community Cloud:
+1. Fork or push to GitHub (`https://github.com/mohikarathi/ForensiGuard`).
+2. Sign in to [Streamlit Community Cloud](https://share.streamlit.io/).
+3. Connect the repository, set main file path to `streamlit_app.py`, and click **Deploy**.
 
 ---
 
