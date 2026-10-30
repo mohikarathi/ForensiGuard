@@ -67,3 +67,15 @@ htmlcov/
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+
+# Academic Submission Deliverables & Manuscript (local only)
+paper/
+Project_Report.docx
+Template.docx
+results_and_figures/Project_Report.pdf
+reports/ieee_report.pdf
+scripts/build_project_report.py
+scripts/compile_ieee_paper.py
+VALIDATION_REPORT.md
+FINAL_AUDIT.md
+UI_IMPLEMENTATION_REPORT.md

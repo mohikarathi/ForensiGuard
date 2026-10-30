@@ -9,12 +9,10 @@
 
 ---
 
-### Academic Information & Author
-- **Student Author:** Mohika Rathi
-- **Registration Number:** 230968032
-- **Institution:** Manipal Institute of Technology, Manipal Academy of Higher Education (MAHE), Manipal, Karnataka, India
-- **Course / Degree:** Mini-Project Submission
-- **Date:** Dec 2026
+### Project Information & Author
+- **Author:** Mohika Rathi
+- **Project:** ForensiGuard
+- **License:** MIT License
 
 ---
 
@@ -178,18 +176,16 @@ All 26 tests pass with exit code 0:
 
 ---
 
-## 9. Submission Directory Structure
+## 9. Project Directory Structure
 
 ```
-ForensiGuard_Mini_Project_Submission/
-├── Project_Report.docx         # Formal Mini-Project Report (MAHE Template, 16 chapters)
+ForensiGuard/
 ├── DATASET_SOURCE.md           # Dataset Provenance, Schema & Citation
 ├── README.md                   # This comprehensive project documentation
-├── VALIDATION_REPORT.md        # Complete audit report with command exit codes & verification
 ├── requirements.txt            # Python dependencies
 ├── pyproject.toml              # Build system configuration
 │
-├── results_and_figures/        # Saved experimental artifacts & publication plots
+├── results_and_figures/        # Saved experimental artifacts & plots
 │   ├── all_experiments_results.json    # Canonical quantitative metrics
 │   ├── predictions_test.csv            # Per-artifact model prediction outputs
 │   ├── benchmark_audit_report.json     # Format shortcut audit report
@@ -198,15 +194,7 @@ ForensiGuard_Mini_Project_Submission/
 │   ├── fig2_pr_comparison.png          # Modality PR curves
 │   ├── fig3_confusion_matrix.png       # 5-class confusion matrix
 │   ├── fig4_ablation_study.png         # 10-variant ablation bar chart
-│   ├── fig_modality_comparison_bar.png # Modality comparison bar chart
-│   └── Project_Report.pdf              # Compiled PDF of the formal project report
-│
-├── paper/                      # Supplementary IEEE Conference Paper
-│   ├── main.tex                        # Camera-ready IEEEtran LaTeX source
-│   ├── main.pdf                        # Compiled 8-page IEEE conference paper
-│   ├── references.bib                  # BibTeX bibliography
-│   ├── figures/                        # LaTeX figures
-│   └── tables/                         # Generated LaTeX tables
+│   └── fig_modality_comparison_bar.png # Modality comparison bar chart
 │
 ├── src/forensiguard/           # Core Python package
 │   ├── data/                           # Ingestion, schema, benchmark generator
@@ -230,7 +218,7 @@ ForensiGuard_Mini_Project_Submission/
 │
 ├── scripts/                    # Runnable execution & reproduction scripts
 │   ├── evaluate.py                     # Single-command evaluation & metric reproduction
-│   ├── build_project_report.py         # Automated DOCX report generator
+│   ├── generate_architecture_diagram.py # Architecture figure generator
 │   └── generate_benchmark.py           # Benchmark generation entrypoint
 │
 ├── tests/                      # Automated pytest validation suite (26 passing tests)

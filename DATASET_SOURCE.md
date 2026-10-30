@@ -3,7 +3,7 @@
 **Dataset Identifier:** `ForensiGuard-Bench-v1`  
 **Dataset Type:** Controlled Synthetic Digital Forensic Benchmark  
 **Generation Date:** October 2026 (Audited and Verified)  
-**Primary Author & Curator:** Mohika Rathi (Reg. No: 230968032), Manipal Institute of Technology  
+**Primary Author & Curator:** Mohika Rathi  
 **Repository Version:** v1.0.0  
 **Manifest Path:** `data/benchmark/benchmark_manifest.csv`  
 
