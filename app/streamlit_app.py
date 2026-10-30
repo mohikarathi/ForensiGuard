@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 import tempfile
+import sys
 from typing import Optional
 import numpy as np
 import pandas as pd
@@ -17,8 +18,11 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Root directory resolution
+# Root directory resolution and module path insertion
 ROOT_DIR = Path(__file__).resolve().parents[1]
+if str(ROOT_DIR / "src") not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR / "src"))
+
 MODELS_DIR = ROOT_DIR / "artifacts" / "models"
 BENCHMARK_DIR = ROOT_DIR / "data" / "benchmark"
 
@@ -44,8 +48,7 @@ def load_pipeline():
 def main():
     st.markdown('<div class="main-title">🛡️ ForensiGuard</div>', unsafe_allow_html=True)
     st.markdown(
-        '<div class="subtitle">A Multimodal ML Framework for Detecting, Attributing & Explaining Anti-Forensic Evidence Manipulation<br>'
-        '<b>Investigators:</b> Mohika Rathi (230968032) & Sreyaan Roy (230968184)</div>',
+        '<div class="subtitle">A Multimodal Machine-Learning Framework for Detecting, Attributing & Explaining Anti-Forensic Evidence Manipulation</div>',
         unsafe_allow_html=True,
     )
 

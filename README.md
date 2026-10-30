@@ -125,24 +125,42 @@ All metrics, prediction CSVs, and figures are saved to:
 
 ---
 
-## 6. How to Run the Interactive Demo
+## 6. How to Run & Deploy the Interactive Demos
 
-ForensiGuard includes a full-stack web demonstration application designed for project evaluation and live defense presentations:
+ForensiGuard offers two interactive forensic triage interfaces:
 
+### Option A: Streamlit Dashboard (Local & Streamlit Cloud)
+
+Run locally:
+```bash
+streamlit run streamlit_app.py
+```
+Open **`http://localhost:8501`** in your browser.
+
+#### 🚀 Deploy to Streamlit Community Cloud in 1 Click:
+1. Sign in to [Streamlit Community Cloud](https://share.streamlit.io/) with your GitHub account.
+2. Click **New app**.
+3. Choose:
+   - **Repository:** `mohikarathi/ForensiGuard`
+   - **Branch:** `main`
+   - **Main file path:** `streamlit_app.py`
+4. Click **Deploy!**
+
+---
+
+### Option B: FastAPI + React Evidence Inspector
+
+Run locally:
 ```bash
 uvicorn app.server:app --host 0.0.0.0 --port 8000
 ```
+Open **`http://localhost:8000`** in your browser.
 
-Open your browser to:
-👉 **`http://localhost:8000`**
-
-### Demo Features:
-- **Pipeline Architecture:** Visual interactive overview of metadata extraction, residual CNN, isolation forest, and stacked late fusion.
-- **Curated Benchmark Selector:** Test against 8 representative test artifacts covering clean files, timestomping, steganography, extension mismatches, and the adaptive evasion sample.
-- **Custom Evidence Ingest:** Drag-and-drop suspect files up to 25 MB with instantaneous hash computation, MIME extraction, and metadata scoring.
-- **TreeSHAP Waterfall Plot:** Interactive feature attribution showing exact Shapley contributions to the tamper score.
-- **Empirical Evaluation Tab:** Live interactive ROC curves ($\text{AUC} = 0.895$), PR curves ($\text{AUC} = 0.977$), 10-variant ablation bar chart, and honest disclosure of limitations.
-- **Report & Paper Download:** Direct access to generated PDF triage reports and the camera-ready IEEE conference manuscript.
+#### Features:
+- **Active Evidence Triage:** Drag-and-drop suspect files up to 25 MB with instantaneous hash computation, MIME extraction, and metadata scoring.
+- **Benchmark Sample Selector:** Test against curated benchmark artifacts covering clean files, timestomping, steganography, extension mismatches, and adaptive evasion.
+- **TreeSHAP Explainability:** Game-theoretic feature attributions detailing the exact signals driving the prediction.
+- **Interactive Benchmarks:** Live ROC/PR curves, confusion matrix, and 10-variant ablation comparisons.
 
 ---
 
