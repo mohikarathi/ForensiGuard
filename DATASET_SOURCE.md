@@ -103,9 +103,8 @@ No external commercial corpora or proprietary disk images were used:
 
 ---
 
-## 6. Licenses and Usage Restrictions
+## 6. Usage Restrictions & Evidentiary Disclaimer
 
-- **License:** The dataset and associated generation code are distributed under the **MIT License**.
 - **Usage Restrictions:** The dataset is intended strictly for academic, research, and non-destructive defensive forensic evaluation.
 - **Evidentiary Disclaimer:** The synthetic samples simulate POSIX filesystem artifacts. They do not represent real criminal case evidence and must not be submitted as real forensic casework.
 

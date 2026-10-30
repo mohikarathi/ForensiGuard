@@ -2,7 +2,6 @@
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://forensi1guard.streamlit.app)
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://python.org)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Tests Status](https://img.shields.io/badge/tests-26%20passed-brightgreen.svg)]()
 [![Forensic Benchmark](https://img.shields.io/badge/benchmark-812%20artifacts-blueviolet.svg)](DATASET_SOURCE.md)
 [![Academic Evaluation](https://img.shields.io/badge/Late%20Fusion%20F1-0.854-success.svg)]()
@@ -22,7 +21,6 @@
 - **Project:** ForensiGuard
 - **Live Demo Dashboard:** [https://forensi1guard.streamlit.app](https://forensi1guard.streamlit.app)
 - **GitHub Repository:** [https://github.com/mohikarathi/ForensiGuard](https://github.com/mohikarathi/ForensiGuard)
-- **License:** MIT License
 
 ---
 
