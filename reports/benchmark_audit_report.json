@@ -1,0 +1,46 @@
+{
+  "audit_timestamp": "2026-10-21T13:33:42.710223+00:00",
+  "manifest_path": "data/benchmark/benchmark_manifest.csv",
+  "benchmark_name": "ForensiGuard-Bench-v1",
+  "total_manifest_records": 812,
+  "total_files_on_disk_before": 2436,
+  "orphan_files_identified": 1624,
+  "orphan_files_removed": 1624,
+  "total_files_on_disk_after": 812,
+  "manifest_to_disk_parity": true,
+  "missing_files_count": 0,
+  "hash_verification": {
+    "passed": 812,
+    "failed": 0,
+    "all_valid": true
+  },
+  "split_distribution": {
+    "train": 566,
+    "test": 126,
+    "val": 120
+  },
+  "technique_distribution": {
+    "timestomping": 280,
+    "steganography": 168,
+    "clean": 140,
+    "file_type_obfuscation": 140,
+    "compound": 84
+  },
+  "source_grouped_isolation": {
+    "num_unique_sources": 140,
+    "train_sources": 98,
+    "val_sources": 21,
+    "test_sources": 21,
+    "train_val_overlap": 0,
+    "train_test_overlap": 0,
+    "val_test_overlap": 0,
+    "zero_leakage_guarantee": true
+  },
+  "discrepancy_root_cause": "Prior iterations of benchmark generation wrote new artifacts into data/benchmark/artifacts/ using random UUID token filenames without purging artifacts from preceding generation runs. Because generation was executed 3 times during pipeline development, exactly 812 * 3 = 2,436 files accumulated on disk while the manifest recorded only the 812 records of the latest run.",
+  "remediation_actions": [
+    "Isolated all 1,624 unreferenced orphan files matching prior runs.",
+    "Purged all 1,624 orphan files from disk.",
+    "Validated 100% (812/812) bit-level SHA-256 and MD5 checksum matches for all active manifest entries.",
+    "Confirmed exact 1:1 file-to-manifest record parity (812 files on disk, 812 rows in manifest)."
+  ]
+}

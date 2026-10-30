@@ -1,0 +1,134 @@
+{
+  "report_metadata": {
+    "framework": "ForensiGuard v1.0.0",
+    "generated_at_utc": "2026-10-21T12:15:36.357528+00:00",
+    "analyst_mode": "Automated Triage"
+  },
+  "evidence_provenance": {
+    "filename": "src_0000_clean.jpg",
+    "file_path": "/home/hp/.gemini/antigravity/scratch/ForensiGuard/data/benchmark/artifacts/folder_case_00/src_0000_clean.jpg",
+    "file_size_bytes": 5829,
+    "sha256": "82033024a5fc6b75e75b78a234bd9e674c73d11f1fab08e0206a344b4b827aa0",
+    "md5": "5bf4b46c97c18fdf3e131901087d004a",
+    "declared_extension": ".jpg"
+  },
+  "observed_physical_facts": {
+    "detected_mime_type": "image/jpeg",
+    "is_signature_mismatch": false,
+    "mtime": 1730000618.094508,
+    "mtime_str": "2024-10-27 03:43:38 UTC",
+    "mtime_subsecond": 0.0945078493818692,
+    "atime_str": "2024-10-27 03:46:40 UTC",
+    "ctime_str": "2024-10-27 03:43:39 UTC",
+    "shannon_entropy": 7.8784270837513315,
+    "lsb_pair_pval": 0.0064911966688339096
+  },
+  "probabilistic_inferences": {
+    "manipulation_probability": 0.03389906322583639,
+    "is_manipulated": false,
+    "attributed_technique": "clean",
+    "attribution_probabilities": {
+      "clean": 0.9469383916633536,
+      "timestomping": 0.023451983055256226,
+      "steganography": 0.027593318157871416,
+      "file_type_obfuscation": 0.001114252566423412,
+      "compound": 0.0009020545570954293
+    },
+    "confidence": 0.9380964807943377
+  },
+  "modality_scores": {
+    "p_metadata": 0.0037044447381049395,
+    "p_image": 0.5100301504135132,
+    "p_image_str": "51.00%",
+    "anomaly_score": 0.3148791535246559,
+    "signature_mismatch_score": 0.0
+  },
+  "feature_attributions": [
+    {
+      "feature": "delta_mtime_ctime",
+      "value": -1.1709778308868408,
+      "shap_value": -4.842986106872559,
+      "direction": "benign"
+    },
+    {
+      "feature": "delta_atime_mtime",
+      "value": 182.1745777130127,
+      "shap_value": -0.49857431650161743,
+      "direction": "benign"
+    },
+    {
+      "feature": "clean_anomaly_score",
+      "value": 0.3148791535246559,
+      "shap_value": -0.0246826633810997,
+      "direction": "benign"
+    },
+    {
+      "feature": "delta_atime_ctime",
+      "value": 181.00359988212585,
+      "shap_value": -0.024591907858848572,
+      "direction": "benign"
+    },
+    {
+      "feature": "is_chronology_inverted",
+      "value": 1.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "mtime_zero_subseconds",
+      "value": 0.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "ctime_zero_subseconds",
+      "value": 0.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "atime_zero_subseconds",
+      "value": 0.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "mtime_round_minute",
+      "value": 0.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "mtime_round_hour",
+      "value": 0.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "folder_mtime_deviation_zscore",
+      "value": -0.21432135608461167,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "folder_mtime_diff_median",
+      "value": 385.778440952301,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "file_size_bytes",
+      "value": 5829.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    }
+  ],
+  "investigator_narrative": [
+    "Time interval between modification and metadata change (mtime - ctime) (observed: -1.17, SHAP: -4.843) supported benign classification.",
+    "Time interval between access and modification (atime - mtime) (observed: 182.17, SHAP: -0.499) supported benign classification.",
+    "Isolation Forest deviation from clean filesystem baseline (observed: 0.31, SHAP: -0.025) supported benign classification.",
+    "Time interval between access and metadata change (atime - ctime) (observed: 181.00, SHAP: -0.025) supported benign classification."
+  ],
+  "missing_modalities_and_warnings": [],
+  "forensic_limitations_and_disclaimer": "ForensiGuard provides probabilistic forensic triage indicators based on machine-learning models. These inferences do NOT constitute proof of guilt or conclusive evidentiary admissibility under Daubert/Frye. Independent manual examination of filesystem journal logs, file slack, and carving is mandatory."
+}

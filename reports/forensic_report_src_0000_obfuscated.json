@@ -1,0 +1,137 @@
+{
+  "report_metadata": {
+    "framework": "ForensiGuard v1.0.0",
+    "generated_at_utc": "2026-10-21T12:15:45.490705+00:00",
+    "analyst_mode": "Automated Triage"
+  },
+  "evidence_provenance": {
+    "filename": "src_0000_obfuscated.jpg",
+    "file_path": "/home/hp/.gemini/antigravity/scratch/ForensiGuard/data/benchmark/artifacts/folder_case_00/src_0000_obfuscated.jpg",
+    "file_size_bytes": 313,
+    "sha256": "bdf588cee79cbc7a7e779d0c5d36b105f020761ebac56f9f599c16850ce36678",
+    "md5": "78f2d44af0224dc78282690b60a71073",
+    "declared_extension": ".jpg"
+  },
+  "observed_physical_facts": {
+    "detected_mime_type": "application/pdf",
+    "is_signature_mismatch": true,
+    "mtime": 1730000618.094508,
+    "mtime_str": "2024-10-27 03:43:38 UTC",
+    "mtime_subsecond": 0.0945078493818692,
+    "atime_str": "2024-10-27 03:46:40 UTC",
+    "ctime_str": "2024-10-27 03:43:39 UTC",
+    "shannon_entropy": 4.797882290173351,
+    "lsb_pair_pval": 0.9939563395110699
+  },
+  "probabilistic_inferences": {
+    "manipulation_probability": 0.9093323234594706,
+    "is_manipulated": true,
+    "attributed_technique": "file_type_obfuscation",
+    "attribution_probabilities": {
+      "clean": 0.02531087969932712,
+      "timestomping": 0.006022526730136648,
+      "steganography": 0.0013474217544324329,
+      "file_type_obfuscation": 0.9672051770360997,
+      "compound": 0.00011399478000420728
+    },
+    "confidence": 0.8780808589658045
+  },
+  "modality_scores": {
+    "p_metadata": 0.0037044447381049395,
+    "p_image": 0.5,
+    "p_image_str": "N/A (Non-image / Signature Mismatch)",
+    "anomaly_score": 0.34969323426366916,
+    "signature_mismatch_score": 1.0
+  },
+  "feature_attributions": [
+    {
+      "feature": "delta_mtime_ctime",
+      "value": -1.1709778308868408,
+      "shap_value": -4.842986106872559,
+      "direction": "benign"
+    },
+    {
+      "feature": "delta_atime_mtime",
+      "value": 182.1745777130127,
+      "shap_value": -0.49857431650161743,
+      "direction": "benign"
+    },
+    {
+      "feature": "clean_anomaly_score",
+      "value": 0.34969323426366916,
+      "shap_value": -0.0246826633810997,
+      "direction": "benign"
+    },
+    {
+      "feature": "delta_atime_ctime",
+      "value": 181.00359988212585,
+      "shap_value": -0.024591907858848572,
+      "direction": "benign"
+    },
+    {
+      "feature": "is_chronology_inverted",
+      "value": 1.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "mtime_zero_subseconds",
+      "value": 0.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "ctime_zero_subseconds",
+      "value": 0.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "atime_zero_subseconds",
+      "value": 0.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "mtime_round_minute",
+      "value": 0.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "mtime_round_hour",
+      "value": 0.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "folder_mtime_deviation_zscore",
+      "value": -0.21432135608461167,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "folder_mtime_diff_median",
+      "value": 385.778440952301,
+      "shap_value": 0.0,
+      "direction": "benign"
+    },
+    {
+      "feature": "file_size_bytes",
+      "value": 313.0,
+      "shap_value": 0.0,
+      "direction": "benign"
+    }
+  ],
+  "investigator_narrative": [
+    "[OBFUSCATION CONFIRMED] Binary magic bytes (application/pdf) directly contradict the declared file extension ('.jpg').",
+    "Time interval between modification and metadata change (mtime - ctime) (observed: -1.17, SHAP: -4.843) supported benign classification.",
+    "Time interval between access and modification (atime - mtime) (observed: 182.17, SHAP: -0.499) supported benign classification.",
+    "Isolation Forest deviation from clean filesystem baseline (observed: 0.35, SHAP: -0.025) supported benign classification.",
+    "Time interval between access and metadata change (atime - ctime) (observed: 181.00, SHAP: -0.025) supported benign classification."
+  ],
+  "missing_modalities_and_warnings": [
+    "Header signature mismatch: Obfuscation detected: File extension is '.jpg', but binary signature indicates 'application/pdf' (.pdf)."
+  ],
+  "forensic_limitations_and_disclaimer": "ForensiGuard provides probabilistic forensic triage indicators based on machine-learning models. These inferences do NOT constitute proof of guilt or conclusive evidentiary admissibility under Daubert/Frye. Independent manual examination of filesystem journal logs, file slack, and carving is mandatory."
+}

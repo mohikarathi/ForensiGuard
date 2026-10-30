@@ -1,0 +1,15 @@
+\begin{table}[htbp]
+\centering
+\caption{Performance Comparison Across Forensic Modalities on Held-Out Test Corpus}
+\label{tab:modality_comparison}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\textbf{Architecture / Evaluation Scope} & \textbf{Acc.} & \textbf{F1} & \textbf{ROC-AUC} & \textbf{PR-AUC} & \textbf{FPR} & \textbf{N} \\ \hline
+Metadata-Only (Full Corpus) & 0.627 & 0.715 & 0.770 & 0.927 & 0.048 & 126 \\ \hline
+Image-Only (Image Domain) & 0.310 & 0.341 & 0.518 & 0.845 & 0.214 & 84 \\ \hline
+Metadata-Only (Shared Domain) & 0.679 & 0.765 & 0.800 & 0.937 & 0.071 & 84 \\ \hline
+Image-Only (Shared Domain) & 0.310 & 0.341 & 0.518 & 0.845 & 0.214 & 84 \\ \hline
+\textbf{ForensiGuard Late Fusion (Shared)} & \textbf{0.679} & \textbf{0.765} & \textbf{0.799} & \textbf{0.959} & \textbf{0.071} & 84 \\ \hline
+\textbf{ForensiGuard Late Fusion (Full)} & \textbf{0.786} & \textbf{0.854} & \textbf{0.895} & \textbf{0.977} & \textbf{0.048} & 126 \\ \hline
+\end{tabular}
+\end{table}

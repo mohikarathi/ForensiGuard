@@ -1,0 +1,232 @@
+{
+  "true_positive_coarse_timestomp": {
+    "artifact_id": "e091646c-595b-4c47-a065-092569f4fcc5",
+    "filename": "art_src_0001_9817babc97.png",
+    "subtype": "coarse_multiyear",
+    "ground_truth": "timestomping",
+    "metadata_prob": 0.9954943656921387,
+    "fusion_prob": 0.9829275987469653,
+    "top_contributions": [
+      {
+        "feature": "delta_mtime_ctime",
+        "value": -157680003.37884283,
+        "shap_value": 5.025577068328857,
+        "direction": "suspicious"
+      },
+      {
+        "feature": "delta_atime_mtime",
+        "value": 0.0,
+        "shap_value": 0.5265086889266968,
+        "direction": "suspicious"
+      },
+      {
+        "feature": "delta_atime_ctime",
+        "value": -157680003.37884283,
+        "shap_value": 0.024765944108366966,
+        "direction": "suspicious"
+      },
+      {
+        "feature": "folder_mtime_deviation_zscore",
+        "value": -20.0,
+        "shap_value": 0.024617280811071396,
+        "direction": "suspicious"
+      },
+      {
+        "feature": "is_chronology_inverted",
+        "value": 1.0,
+        "shap_value": 0.0,
+        "direction": "benign"
+      }
+    ],
+    "explanation": [
+      "[TEMPORAL GAP] Modification time is 43800.0 hours older than metadata change time (SHAP: +5.026).",
+      "Time interval between access and modification (atime - mtime) (observed: 0.00, SHAP: +0.527) pushed toward suspicious.",
+      "Time interval between access and metadata change (atime - ctime) (observed: -157680003.38, SHAP: +0.025) pushed toward suspicious.",
+      "[CONTEXTUAL OUTLIER] File timestamp is -20.00 standard deviations away from neighboring files in the directory (SHAP: +0.025), suggesting isolated backdating/forward-dating."
+    ]
+  },
+  "true_positive_subtle_timestomp": {
+    "artifact_id": "36c6392e-774a-44bd-bf07-7f008c0637ff",
+    "filename": "art_src_0001_c0ac53e960.png",
+    "subtype": "subtle_2h",
+    "ground_truth": "timestomping",
+    "metadata_prob": 0.9954943656921387,
+    "fusion_prob": 0.9829275987469653,
+    "top_contributions": [
+      {
+        "feature": "delta_mtime_ctime",
+        "value": -9003.378842830658,
+        "shap_value": 5.025577068328857,
+        "direction": "suspicious"
+      },
+      {
+        "feature": "delta_atime_mtime",
+        "value": 0.0,
+        "shap_value": 0.5265086889266968,
+        "direction": "suspicious"
+      },
+      {
+        "feature": "delta_atime_ctime",
+        "value": -9003.378842830658,
+        "shap_value": 0.024765944108366966,
+        "direction": "suspicious"
+      },
+      {
+        "feature": "folder_mtime_deviation_zscore",
+        "value": -5.137353505293528,
+        "shap_value": 0.024617280811071396,
+        "direction": "suspicious"
+      },
+      {
+        "feature": "is_chronology_inverted",
+        "value": 1.0,
+        "shap_value": 0.0,
+        "direction": "benign"
+      }
+    ],
+    "explanation": [
+      "[TEMPORAL GAP] Modification time is 2.5 hours older than metadata change time (SHAP: +5.026).",
+      "Time interval between access and modification (atime - mtime) (observed: 0.00, SHAP: +0.527) pushed toward suspicious.",
+      "Time interval between access and metadata change (atime - ctime) (observed: -9003.38, SHAP: +0.025) pushed toward suspicious.",
+      "[CONTEXTUAL OUTLIER] File timestamp is -5.14 standard deviations away from neighboring files in the directory (SHAP: +0.025), suggesting isolated backdating/forward-dating."
+    ]
+  },
+  "false_positive_clean": {
+    "artifact_id": "71aecd63-b33e-459c-8aff-134e24421028",
+    "filename": "art_src_0092_d9f9fec154.png",
+    "subtype": "unaltered",
+    "ground_truth": "clean",
+    "metadata_prob": 0.9521446824073792,
+    "fusion_prob": 0.9750403071169137,
+    "top_contributions": [
+      {
+        "feature": "delta_mtime_ctime",
+        "value": -4.999539852142334,
+        "shap_value": 3.742913007736206,
+        "direction": "suspicious"
+      },
+      {
+        "feature": "delta_atime_mtime",
+        "value": 110.63768267631531,
+        "shap_value": -0.49857431650161743,
+        "direction": "benign"
+      },
+      {
+        "feature": "folder_mtime_deviation_zscore",
+        "value": 0.1721369183063507,
+        "shap_value": -0.025665346533060074,
+        "direction": "benign"
+      },
+      {
+        "feature": "delta_atime_ctime",
+        "value": 105.63814282417297,
+        "shap_value": -0.024591907858848572,
+        "direction": "benign"
+      },
+      {
+        "feature": "is_chronology_inverted",
+        "value": 1.0,
+        "shap_value": 0.0,
+        "direction": "benign"
+      }
+    ],
+    "explanation": [
+      "Time interval between modification and metadata change (mtime - ctime) (observed: -5.00, SHAP: +3.743) pushed toward suspicious.",
+      "Time interval between access and modification (atime - mtime) (observed: 110.64, SHAP: -0.499) supported benign classification.",
+      "Z-score deviation from sibling files in parent directory (observed: 0.17, SHAP: -0.026) supported benign classification.",
+      "Time interval between access and metadata change (atime - ctime) (observed: 105.64, SHAP: -0.025) supported benign classification."
+    ]
+  },
+  "false_negative_steganography": {
+    "artifact_id": "b77201ed-205f-46f0-a7e4-b36f3ed193b2",
+    "filename": "art_src_0001_84ea643005.png",
+    "subtype": "high_payload",
+    "ground_truth": "steganography",
+    "metadata_prob": 0.003701296169310808,
+    "fusion_prob": 0.27378997114613757,
+    "top_contributions": [
+      {
+        "feature": "delta_mtime_ctime",
+        "value": -2.7292580604553223,
+        "shap_value": -4.842986106872559,
+        "direction": "benign"
+      },
+      {
+        "feature": "delta_atime_mtime",
+        "value": 69.64100408554077,
+        "shap_value": -0.49857431650161743,
+        "direction": "benign"
+      },
+      {
+        "feature": "folder_mtime_deviation_zscore",
+        "value": -0.13699262486563787,
+        "shap_value": -0.025665346533060074,
+        "direction": "benign"
+      },
+      {
+        "feature": "delta_atime_ctime",
+        "value": 66.91174602508545,
+        "shap_value": -0.024591907858848572,
+        "direction": "benign"
+      },
+      {
+        "feature": "is_chronology_inverted",
+        "value": 1.0,
+        "shap_value": 0.0,
+        "direction": "benign"
+      }
+    ],
+    "explanation": [
+      "Time interval between modification and metadata change (mtime - ctime) (observed: -2.73, SHAP: -4.843) supported benign classification.",
+      "Time interval between access and modification (atime - mtime) (observed: 69.64, SHAP: -0.499) supported benign classification.",
+      "Z-score deviation from sibling files in parent directory (observed: -0.14, SHAP: -0.026) supported benign classification.",
+      "Time interval between access and metadata change (atime - ctime) (observed: 66.91, SHAP: -0.025) supported benign classification."
+    ]
+  },
+  "true_positive_compound": {
+    "artifact_id": "7e08ce15-2532-4da7-b181-d8b36a7c4634",
+    "filename": "art_src_0001_913ec116a3.png",
+    "subtype": "stego_and_timestomp",
+    "ground_truth": "compound",
+    "metadata_prob": 0.9954943656921387,
+    "fusion_prob": 0.9829201196384502,
+    "top_contributions": [
+      {
+        "feature": "delta_mtime_ctime",
+        "value": -2592003.3788428307,
+        "shap_value": 5.025577068328857,
+        "direction": "suspicious"
+      },
+      {
+        "feature": "delta_atime_mtime",
+        "value": 0.0,
+        "shap_value": 0.5265086889266968,
+        "direction": "suspicious"
+      },
+      {
+        "feature": "delta_atime_ctime",
+        "value": -2592003.3788428307,
+        "shap_value": 0.024765944108366966,
+        "direction": "suspicious"
+      },
+      {
+        "feature": "folder_mtime_deviation_zscore",
+        "value": -20.0,
+        "shap_value": 0.024617280811071396,
+        "direction": "suspicious"
+      },
+      {
+        "feature": "is_chronology_inverted",
+        "value": 1.0,
+        "shap_value": 0.0,
+        "direction": "benign"
+      }
+    ],
+    "explanation": [
+      "[TEMPORAL GAP] Modification time is 720.0 hours older than metadata change time (SHAP: +5.026).",
+      "Time interval between access and modification (atime - mtime) (observed: 0.00, SHAP: +0.527) pushed toward suspicious.",
+      "Time interval between access and metadata change (atime - ctime) (observed: -2592003.38, SHAP: +0.025) pushed toward suspicious.",
+      "[CONTEXTUAL OUTLIER] File timestamp is -20.00 standard deviations away from neighboring files in the directory (SHAP: +0.025), suggesting isolated backdating/forward-dating."
+    ]
+  }
+}

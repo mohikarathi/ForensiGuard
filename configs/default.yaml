@@ -1,0 +1,76 @@
+seed: 42
+
+paths:
+  data_dir: "data"
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  benchmark_dir: "data/benchmark"
+  models_dir: "artifacts/models"
+  results_dir: "results"
+  reports_dir: "reports"
+  figures_dir: "paper/figures"
+  tables_dir: "paper/tables"
+
+benchmark:
+  num_sources: 140
+  manipulations_per_source:
+    include_clean: true
+    include_timestomp_coarse: true
+    include_timestomp_subtle: true
+    include_stego_lsb: true
+    include_stego_steghide: true
+    include_obfuscation: true
+    include_compound: true
+  split_ratios:
+    train: 0.70
+    val: 0.15
+    test: 0.15
+  split_group_key: "source_file_id"
+
+metadata_model:
+  anomaly:
+    model_type: "isolation_forest"
+    contamination: 0.05
+    n_estimators: 150
+    random_state: 42
+  classifier:
+    model_type: "xgboost"
+    n_estimators: 120
+    max_depth: 4
+    learning_rate: 0.05
+    subsample: 0.85
+    colsample_bytree: 0.85
+    random_state: 42
+  features:
+    - delta_mtime_ctime
+    - delta_atime_mtime
+    - delta_atime_ctime
+    - is_chronology_inverted
+    - mtime_zero_subseconds
+    - ctime_zero_subseconds
+    - atime_zero_subseconds
+    - mtime_round_minute
+    - mtime_round_hour
+    - folder_mtime_deviation_zscore
+    - folder_mtime_diff_median
+    - file_size_bytes
+
+image_model:
+  architecture: "SRNetLite"
+  input_size: 128
+  batch_size: 16
+  epochs: 15
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  filter_type: "laplacian_and_kv"
+
+fusion_model:
+  meta_classifier: "logistic_regression"
+  cv_folds: 5
+  c_param: 1.0
+  random_state: 42
+
+evaluation:
+  target_fpr_thresholds: [0.01, 0.05]
+  bootstrap_iterations: 200
+  confidence_level: 0.95
