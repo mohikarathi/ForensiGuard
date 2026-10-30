@@ -48,11 +48,12 @@ export const EvaluationView: React.FC<EvaluationViewProps> = ({
   const curveData = () => {
     if (!curves) return [];
     const sourceCurves = selectedCurveType === 'roc' ? curves.roc_curves : curves.pr_curves;
+    if (!sourceCurves) return [];
     const fusionPts = sourceCurves['late_fusion'] || [];
 
     return fusionPts.map((pt, idx) => {
-      const metaPt = (sourceCurves['metadata_classifier'] || [])[idx];
-      const imgPt = (sourceCurves['image_cnn'] || [])[idx];
+      const metaPt = (sourceCurves['metadata_only'] || sourceCurves['metadata_classifier'] || [])[idx];
+      const imgPt = (sourceCurves['image_only'] || sourceCurves['image_cnn'] || [])[idx];
       const ifPt = (sourceCurves['anomaly_detector'] || [])[idx];
 
       return {
@@ -96,7 +97,7 @@ export const EvaluationView: React.FC<EvaluationViewProps> = ({
               <span>Test Set Performance (Late Fusion)</span>
             </div>
             <span className="font-mono text-xs text-charcoal-500 bg-surface-subtle px-2.5 py-1 rounded border border-border">
-              Operating Threshold &tau; = {(evaluation.operating_threshold ?? 0.5).toFixed(3)}
+              Operating Threshold &tau; = {(evaluation?.operating_threshold ?? 0.5).toFixed(3)}
             </span>
           </div>
 
@@ -292,7 +293,7 @@ export const EvaluationView: React.FC<EvaluationViewProps> = ({
                 dataKey="x"
                 type="number"
                 domain={[0, 1]}
-                tickFormatter={(val) => val.toFixed(1)}
+                tickFormatter={(val) => (typeof val === 'number' ? val.toFixed(1) : '')}
                 label={{
                   value: selectedCurveType === 'roc' ? 'False Positive Rate (FPR)' : 'Recall',
                   position: 'insideBottom',
@@ -303,7 +304,7 @@ export const EvaluationView: React.FC<EvaluationViewProps> = ({
               />
               <YAxis
                 domain={[0, 1]}
-                tickFormatter={(val) => val.toFixed(1)}
+                tickFormatter={(val) => (typeof val === 'number' ? val.toFixed(1) : '')}
                 label={{
                   value: selectedCurveType === 'roc' ? 'True Positive Rate (TPR)' : 'Precision',
                   angle: -90,
@@ -314,11 +315,13 @@ export const EvaluationView: React.FC<EvaluationViewProps> = ({
               />
               <Tooltip
                 formatter={(value: any, name: string) => [
-                  typeof value === 'number' ? value.toFixed(3) : value,
-                  name.replace(/_/g, ' '),
+                  typeof value === 'number' ? value.toFixed(3) : (value ?? ''),
+                  name ? name.replace(/_/g, ' ') : '',
                 ]}
                 labelFormatter={(x: any) =>
-                  `${selectedCurveType === 'roc' ? 'FPR' : 'Recall'}: ${Number(x).toFixed(3)}`
+                  `${selectedCurveType === 'roc' ? 'FPR' : 'Recall'}: ${
+                    typeof x === 'number' ? x.toFixed(3) : (x ?? '')
+                  }`
                 }
               />
               <Legend verticalAlign="top" height={36} />
@@ -450,24 +453,24 @@ export const EvaluationView: React.FC<EvaluationViewProps> = ({
           <div className="p-3.5 rounded-lg bg-surface border border-red-200">
             <span className="text-[10px] font-bold text-charcoal-400 uppercase">Adaptive Test Samples</span>
             <div className="text-xl font-bold font-mono text-charcoal-900 mt-1">
-              {evaluation.adaptive_adversary_summary?.adaptive_sample_count ?? 21} <span className="text-xs font-normal">Artifacts</span>
+              {evaluation?.adaptive_adversary_summary?.adaptive_sample_count ?? 21} <span className="text-xs font-normal">Artifacts</span>
             </div>
             <div className="text-[10px] text-charcoal-500 mt-0.5">Invariant-preserving shifts</div>
           </div>
           <div className="p-3.5 rounded-lg bg-surface border border-red-200">
             <span className="text-[10px] font-bold text-charcoal-400 uppercase">Metadata Detection Rate</span>
             <div className="text-xl font-bold font-mono text-red-700 mt-1">
-              {(((evaluation.adaptive_adversary_summary?.metadata_model_detection_rate ?? 0)) * 100).toFixed(1)}%
+              {(((evaluation?.adaptive_adversary_summary?.metadata_model_detection_rate ?? 0)) * 100).toFixed(1)}%
             </div>
             <div className="text-[10px] text-charcoal-500 mt-0.5">0 / 21 detected</div>
           </div>
           <div className="p-3.5 rounded-lg bg-surface border border-red-200">
             <span className="text-[10px] font-bold text-charcoal-400 uppercase">Late Fusion Detection Rate</span>
             <div className="text-xl font-bold font-mono text-red-700 mt-1">
-              {(((evaluation.adaptive_adversary_summary?.fusion_model_detection_rate ?? 0)) * 100).toFixed(1)}%
+              {(((evaluation?.adaptive_adversary_summary?.fusion_model_detection_rate ?? 0)) * 100).toFixed(1)}%
             </div>
             <div className="text-[10px] text-charcoal-500 mt-0.5">
-              Mean prob: {(evaluation.adaptive_adversary_summary?.fusion_model_mean_prob ?? evaluation.adaptive_adversary_summary?.mean_adaptive_manipulation_probability ?? 0.216).toFixed(3)}
+              Mean prob: {(evaluation?.adaptive_adversary_summary?.fusion_model_mean_prob ?? evaluation?.adaptive_adversary_summary?.mean_adaptive_manipulation_probability ?? 0.216).toFixed(3)}
             </div>
           </div>
         </div>
