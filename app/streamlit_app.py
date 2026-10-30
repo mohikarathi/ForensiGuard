@@ -22,23 +22,48 @@ MODELS_DIR = ROOT_DIR / "artifacts" / "models"
 BENCHMARK_DIR = ROOT_DIR / "data" / "benchmark"
 RESULTS_FILE = ROOT_DIR / "results" / "all_experiments_results.json"
 
-st.set_page_config(
-    page_title="ForensiGuard — Evidence Inspector",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
+try:
+    st.set_page_config(
+        page_title="ForensiGuard — Evidence Inspector",
+        layout="wide",
+        initial_sidebar_state="expanded",
+    )
+except Exception:
+    pass
 
 # Force full-screen layout and remove standard Streamlit padding constraints
 st.markdown(
     """
     <style>
-        /* Maximize usable screen real estate */
+        /* Maximize usable screen real estate across all Streamlit versions & Cloud */
+        [data-testid="stAppViewContainer"] {
+            max-width: 100vw !important;
+            width: 100vw !important;
+        }
+        
+        [data-testid="stAppViewContainer"] > section.main {
+            max-width: 100% !important;
+            width: 100% !important;
+            padding: 0 !important;
+        }
+
+        .main .block-container,
+        div[data-testid="stMainBlockContainer"],
+        .stMainBlockContainer,
         .block-container {
             max-width: 100% !important;
-            padding-top: 1.5rem !important;
-            padding-bottom: 2rem !important;
+            width: 100% !important;
+            padding-top: 1.25rem !important;
+            padding-bottom: 2.5rem !important;
             padding-left: 2.5rem !important;
             padding-right: 2.5rem !important;
+        }
+        
+        /* Remove narrow width constraints on layout blocks */
+        div[data-testid="stVerticalBlock"],
+        div[data-testid="stHorizontalBlock"] {
+            width: 100% !important;
+            max-width: 100% !important;
         }
         
         /* Typography */
@@ -50,6 +75,7 @@ st.markdown(
         /* Clean card borders */
         div[data-testid="stVerticalBlock"] > div[data-testid="stContainer"] {
             border-radius: 8px;
+            background-color: #ffffff;
         }
     </style>
     """,
@@ -77,20 +103,20 @@ def main():
     with header_col1:
         st.markdown(
             """
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 2px;">
-                <span style="font-size: 1.5rem; font-weight: 800; color: #1a201c;">ForensiGuard</span>
-                <span style="font-size: 0.72rem; font-weight: 700; background: #f4f1ea; color: #404743; padding: 2px 8px; border-radius: 4px; border: 1px solid #e6e3dc; letter-spacing: 0.05em;">EVIDENCE INSPECTOR</span>
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 4px;">
+                <span style="font-size: 2.4rem; font-weight: 900; color: #1a201c; letter-spacing: -0.03em; line-height: 1.1;">ForensiGuard</span>
+                <span style="font-size: 0.85rem; font-weight: 800; background: #f4f1ea; color: #354038; padding: 4px 12px; border-radius: 6px; border: 1px solid #dcd7ce; letter-spacing: 0.08em;">EVIDENCE INSPECTOR</span>
             </div>
-            <div style="font-size: 0.85rem; color: #5c635f;">Multi-Modal Digital Evidence Anti-Forensic Triage</div>
+            <div style="font-size: 1.1rem; font-weight: 500; color: #5c635f;">Multi-Modal Digital Evidence Anti-Forensic Triage</div>
             """,
             unsafe_allow_html=True,
         )
     with header_col2:
         st.markdown(
             """
-            <div style="text-align: right; padding-top: 6px;">
-                <span style="font-family: monospace; font-size: 0.75rem; background: #f4f1ea; border: 1px solid #e6e3dc; padding: 4px 10px; border-radius: 4px; color: #404743;">Threshold: &tau; = 0.500</span>
-                <span style="font-family: monospace; font-size: 0.75rem; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 4px 10px; border-radius: 4px; color: #166534; font-weight: 600; margin-left: 6px;">Pipeline Ready</span>
+            <div style="text-align: right; padding-top: 10px;">
+                <span style="font-family: monospace; font-size: 0.85rem; background: #f4f1ea; border: 1px solid #dcd7ce; padding: 6px 12px; border-radius: 6px; color: #404743; font-weight: 600;">Threshold: &tau; = 0.500</span>
+                <span style="font-family: monospace; font-size: 0.85rem; background: #f0fdf4; border: 1px solid #86efac; padding: 6px 12px; border-radius: 6px; color: #15803d; font-weight: 700; margin-left: 8px;">Pipeline Ready</span>
             </div>
             """,
             unsafe_allow_html=True,
@@ -121,8 +147,15 @@ def main():
     # VIEW 1: ANALYZE FILE
     # ==========================================================================
     if nav == "Analyze File":
-        st.markdown("### Evidence File Analysis")
-        st.caption("Scan files to detect timestomping, hidden payloads, or disguised file types.")
+        st.markdown(
+            """
+            <div style="margin-top: 0.25rem; margin-bottom: 1.25rem;">
+                <h1 style="font-size: 2.2rem; font-weight: 800; color: #1a201c; margin: 0 0 0.35rem 0; letter-spacing: -0.02em;">Evidence File Analysis</h1>
+                <p style="font-size: 1.05rem; color: #5c635f; margin: 0;">Scan files to detect timestomping, hidden payloads, or disguised file types.</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
         input_mode = st.radio(
             "Mode",
@@ -154,14 +187,15 @@ def main():
                 is_curr = (st.session_state["selected_sample"] == fname)
                 with r1_cols[idx]:
                     with st.container(border=True):
-                        st.markdown(f"**`{fname[:18]}...`**")
-                        st.caption(f"{tech}\n{subtype}")
+                        st.markdown(f"<div style='font-family: monospace; font-size: 0.85rem; font-weight: 600; color: #2d3748;'>{fname[:20]}...</div>", unsafe_allow_html=True)
+                        st.markdown(f"<div style='margin-top: 4px;'><span style='font-weight: 700; font-size: 0.95rem; color: #1a201c;'>{tech}</span><br><span style='font-size: 0.8rem; color: #5c635f;'>{subtype}</span></div>", unsafe_allow_html=True)
                         sub_c1, sub_c2 = st.columns(2)
                         with sub_c1:
                             st.caption(f"`{ext}`")
                         with sub_c2:
                             st.caption(f"{size}")
-                        if st.button("Select", key=f"btn_{fname}", use_container_width=True, type="primary" if is_curr else "secondary"):
+                        btn_txt = "Selected" if is_curr else "Select"
+                        if st.button(btn_txt, key=f"btn_{fname}", use_container_width=True, type="primary" if is_curr else "secondary"):
                             st.session_state["selected_sample"] = fname
                             st.rerun()
 
@@ -171,14 +205,15 @@ def main():
                 is_curr = (st.session_state["selected_sample"] == fname)
                 with r2_cols[idx - 4]:
                     with st.container(border=True):
-                        st.markdown(f"**`{fname[:18]}...`**")
-                        st.caption(f"{tech}\n{subtype}")
+                        st.markdown(f"<div style='font-family: monospace; font-size: 0.85rem; font-weight: 600; color: #2d3748;'>{fname[:20]}...</div>", unsafe_allow_html=True)
+                        st.markdown(f"<div style='margin-top: 4px;'><span style='font-weight: 700; font-size: 0.95rem; color: #1a201c;'>{tech}</span><br><span style='font-size: 0.8rem; color: #5c635f;'>{subtype}</span></div>", unsafe_allow_html=True)
                         sub_c1, sub_c2 = st.columns(2)
                         with sub_c1:
                             st.caption(f"`{ext}`")
                         with sub_c2:
                             st.caption(f"{size}")
-                        if st.button("Select", key=f"btn_{fname}", use_container_width=True, type="primary" if is_curr else "secondary"):
+                        btn_txt = "Selected" if is_curr else "Select"
+                        if st.button(btn_txt, key=f"btn_{fname}", use_container_width=True, type="primary" if is_curr else "secondary"):
                             st.session_state["selected_sample"] = fname
                             st.rerun()
 
@@ -186,6 +221,7 @@ def main():
             curr_item = next((item for item in sample_catalog if item[0] == st.session_state["selected_sample"]), sample_catalog[0])
             target_filename = curr_item[0]
             curr_desc = curr_item[5]
+            curr_ext = curr_item[3]
 
             manifest_path = BENCHMARK_DIR / "benchmark_manifest.csv"
             if manifest_path.exists():
@@ -197,8 +233,12 @@ def main():
 
             st.write("")
             with st.container(border=True):
-                st.markdown(f"**Selected Artifact:** `{target_filename}`")
-                st.caption(curr_desc)
+                c_info, c_action = st.columns([3, 1])
+                with c_info:
+                    st.markdown(f"**Selected:** `{target_filename}` &nbsp;&bull;&nbsp; **MIME:** `{'image/png' if curr_ext == '.png' else 'application/pdf'}`")
+                    st.caption(curr_desc)
+                with c_action:
+                    execute_btn = st.button("Run Analysis ->", type="primary", use_container_width=True, key="run_sample_btn")
 
         else:
             # Upload local file
@@ -215,14 +255,12 @@ def main():
                 selected_file_path = temp_path
                 target_filename = uploaded.name
                 st.info(f"File uploaded: {target_filename} ({uploaded.size / 1024:.1f} KB)")
+                execute_btn = st.button("Run Analysis ->", type="primary", use_container_width=True, key="run_upload_btn")
+            else:
+                execute_btn = False
 
-        # Run Analysis Button
+        # Run Analysis Logic
         if selected_file_path and selected_file_path.exists():
-            st.write("")
-            col_run, _ = st.columns([1, 4])
-            with col_run:
-                execute_btn = st.button("Run Analysis", type="primary", use_container_width=True)
-
             if execute_btn or st.session_state["current_analysis"] is None:
                 pipeline = load_pipeline()
                 with st.spinner("Extracting multi-modal features and evaluating stacked late fusion..."):
@@ -387,8 +425,15 @@ def main():
     # VIEW 2: HOW IT WORKS
     # ==========================================================================
     elif nav == "How It Works":
-        st.markdown("### How ForensiGuard Works")
-        st.caption("Multi-modal digital evidence anti-forensic triage pipeline architecture.")
+        st.markdown(
+            """
+            <div style="margin-top: 0.25rem; margin-bottom: 1.25rem;">
+                <h1 style="font-size: 2.2rem; font-weight: 800; color: #1a201c; margin: 0 0 0.35rem 0; letter-spacing: -0.02em;">How ForensiGuard Works</h1>
+                <p style="font-size: 1.05rem; color: #5c635f; margin: 0;">Multi-modal digital evidence anti-forensic triage pipeline architecture.</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
         with st.container(border=True):
             st.markdown("#### Unified 5-Stage Multimodal Detection Architecture")
@@ -428,8 +473,15 @@ def main():
     # VIEW 3: AUDIT LOG
     # ==========================================================================
     elif nav == "Audit Log":
-        st.markdown("### Analysis Audit Log")
-        st.caption("Session audit trail of all inspected digital evidence artifacts.")
+        st.markdown(
+            """
+            <div style="margin-top: 0.25rem; margin-bottom: 1.25rem;">
+                <h1 style="font-size: 2.2rem; font-weight: 800; color: #1a201c; margin: 0 0 0.35rem 0; letter-spacing: -0.02em;">Analysis Audit Log</h1>
+                <p style="font-size: 1.05rem; color: #5c635f; margin: 0;">Session audit trail of all inspected digital evidence artifacts.</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
         if st.session_state["history"]:
             df_hist = pd.DataFrame(st.session_state["history"])
@@ -453,8 +505,15 @@ def main():
     # VIEW 4: BENCHMARKS
     # ==========================================================================
     elif nav == "Benchmarks":
-        st.markdown("### Benchmark Performance")
-        st.caption("Evaluation metrics across 126 held-out test artifacts.")
+        st.markdown(
+            """
+            <div style="margin-top: 0.25rem; margin-bottom: 1.25rem;">
+                <h1 style="font-size: 2.2rem; font-weight: 800; color: #1a201c; margin: 0 0 0.35rem 0; letter-spacing: -0.02em;">Benchmark Performance</h1>
+                <p style="font-size: 1.05rem; color: #5c635f; margin: 0;">Evaluation metrics across 126 held-out test artifacts.</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
         b1, b2, b3, b4 = st.columns(4)
         with b1:
