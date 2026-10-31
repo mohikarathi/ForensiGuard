@@ -411,9 +411,18 @@ class ExperimentRunner:
         cond_attr_acc = float(np.mean(attr_preds[manip_mask] == y_test_tech[manip_mask]))
         coarse_attr_acc = float(np.mean((attr_preds > 0) == (y_test_tech > 0)))
 
+        attr_n = int(np.sum(attr_preds == y_test_tech))
+        attr_d = int(len(y_test_tech))
+        cond_n = int(np.sum(attr_preds[manip_mask] == y_test_tech[manip_mask]))
+        cond_d = int(np.sum(manip_mask))
+
         attribution_analysis = {
             "overall_accuracy_5class": attr_acc,
+            "overall_correct": attr_n,
+            "overall_total": attr_d,
             "conditional_accuracy_manipulated_only": cond_attr_acc,
+            "conditional_correct": cond_n,
+            "conditional_total": cond_d,
             "coarse_binary_attribution_accuracy": coarse_attr_acc,
             "per_class_metrics": clf_rep,
             "confusion_matrix_5x5": {
@@ -433,6 +442,11 @@ class ExperimentRunner:
             },
             "late_fusion_full_corpus": m_fusion_full,
             "technique_attribution_accuracy": attr_acc,
+            "technique_attribution_correct": attr_n,
+            "technique_attribution_total": attr_d,
+            "conditional_attribution_accuracy": cond_attr_acc,
+            "conditional_attribution_correct": cond_n,
+            "conditional_attribution_total": cond_d,
             "attribution_analysis": attribution_analysis,
             "selected_threshold": fusion_model.decision_threshold,
         }

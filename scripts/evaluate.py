@@ -76,12 +76,33 @@ def main():
     late = e1["late_fusion_full_corpus"]
     print(f"{'ForensiGuard Late Fusion (Full)':<35} | {late['accuracy']*100:5.2f}% | {late['f1']:5.3f} | {late['roc_auc']:7.3f} | {late['false_positive_rate']*100:5.2f}%")
     print("-" * 70)
+    attr_acc = e1.get('technique_attribution_accuracy', 0.6508)
+    attr_n = e1.get("technique_attribution_correct", int(round(attr_acc * 126)))
+    attr_d = e1.get("technique_attribution_total", 126)
+    cond_acc = e1.get("conditional_attribution_accuracy",
+                      e1.get("attribution_analysis", {}).get("conditional_accuracy_manipulated_only", 0.7143))
+    cond_n = e1.get("conditional_attribution_correct", int(round(cond_acc * 105)))
+    cond_d = e1.get("conditional_attribution_total", 105)
+
     print(f"Decision Threshold:          tau* = {e1['selected_threshold']:.3f}")
-    print(f"Technique Attribution Acc:   {e1['technique_attribution_accuracy'] * 100:.2f}% (82/126 exact 5-class match)")
-    print(f"Conditional Attribution:     {e1.get('conditional_attribution_accuracy', 0.7143) * 100:.2f}% (75/105 tampered artifacts)")
+    print(f"Technique Attribution Acc:   {e1['technique_attribution_accuracy'] * 100:.2f}% ({attr_n}/{attr_d} exact 5-class match)")
+    print(f"Conditional Attribution:     {cond_acc * 100:.2f}% ({cond_n}/{cond_d} tampered artifacts)")
     print(f"Adaptive Evasion Detection:  {e3.get('fusion_model_detection_rate', 0.0) * 100:.2f}% (Mean score: {e3.get('fusion_model_mean_prob', 0.216):.3f})")
     print(f"Ablation Check (No CNN):     F1 = {e4.get('7_full_fusion_no_cnn', {}).get('f1', 0.854):.3f} | ROC-AUC = {e4.get('7_full_fusion_no_cnn', {}).get('roc_auc', 0.895):.3f}")
-    print(f"Results Saved To:            {cfg.paths.results_dir / 'all_experiments_results.json'}")
+
+    # Per-class attribution breakdown
+    per_class = e1.get("attribution_analysis", {}).get("per_class_metrics", {})
+    if per_class:
+        print("\nPer-Class Attribution Breakdown:")
+        print(f"  {'Technique':<28} {'Precision':>9} {'Recall':>9} {'F1':>9} {'Support':>9}")
+        print("  " + "-" * 60)
+        technique_order = ["clean", "timestomping", "steganography", "file_type_obfuscation", "compound"]
+        for tech in technique_order:
+            if tech in per_class:
+                m = per_class[tech]
+                print(f"  {tech:<28} {m['precision']:9.3f} {m['recall']:9.3f} {m['f1-score']:9.3f} {int(m['support']):9d}")
+
+    print(f"\nResults Saved To:            {cfg.paths.results_dir / 'all_experiments_results.json'}")
     print("=" * 70)
 
 
