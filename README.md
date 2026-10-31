@@ -1,13 +1,13 @@
 # ForensiGuard: A Multimodal Machine-Learning Framework for Detecting, Attributing and Explaining Anti-Forensic Manipulation of Digital Evidence
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://forensi1guard.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://forens1guard.streamlit.app)
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://python.org)
 [![Tests Status](https://img.shields.io/badge/tests-26%20passed-brightgreen.svg)]()
 [![Forensic Benchmark](https://img.shields.io/badge/benchmark-812%20artifacts-blueviolet.svg)](DATASET_SOURCE.md)
 [![Academic Evaluation](https://img.shields.io/badge/Late%20Fusion%20F1-0.854-success.svg)]()
 [![ROC-AUC](https://img.shields.io/badge/ROC--AUC-0.895-success.svg)]()
 
-> **Live Interactive Cloud Demo:** [https://forensi1guard.streamlit.app](https://forensi1guard.streamlit.app)  
+> **Live Interactive Cloud Demo:** [https://forens1guard.streamlit.app](https://forens1guard.streamlit.app)  
 > **GitHub Repository:** [https://github.com/mohikarathi/ForensiGuard](https://github.com/mohikarathi/ForensiGuard)
 
 ---
@@ -20,7 +20,7 @@
 - **Branch:** Data Science
 - **Subject:** Data Forensics
 - **Project:** ForensiGuard
-- **Live Demo Dashboard:** [https://forensi1guard.streamlit.app](https://forensi1guard.streamlit.app)
+- **Live Demo Dashboard:** [https://forens1guard.streamlit.app](https://forens1guard.streamlit.app)
 - **GitHub Repository:** [https://github.com/mohikarathi/ForensiGuard](https://github.com/mohikarathi/ForensiGuard)
 
 ---
@@ -183,7 +183,7 @@ ForensiGuard offers two interactive forensic triage interfaces:
 
 ### Option A: Streamlit Dashboard (Live Cloud Deployment & Local)
 
-- **Live Cloud Demo:** **[https://forensi1guard.streamlit.app](https://forensi1guard.streamlit.app)** *(Instant browser access, zero local installation required)*
+- **Live Cloud Demo:** **[https://forens1guard.streamlit.app](https://forens1guard.streamlit.app)** *(Instant browser access, zero local installation required)*
 
 Run locally:
 ```bash
